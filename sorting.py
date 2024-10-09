@@ -1,5 +1,3 @@
-import math
-
 #bubble(list) - > sorted list
 def bubble(lst):
     for i in range(len(lst)-1):
@@ -32,42 +30,45 @@ def insertion(lst:list):
 
 #shell(List) -> sorted list
 def shell(lst):
-    gaps = []
-    length = len(lst)
-    while length > 1:
-        length = length//2
-        gaps.append(length)
-    print(gaps)
-    for gap in gaps:
-        lst_starting_indices = list(range(len(lst)-1-gap))
-        for i in lst_starting_indices:
-            pass
+    gap = len(lst) // 2
+    while gap > 0:
+        # loops through all gap indices
+        for i in range(gap, len(lst)):
+            current = lst[i]
+            
+            temp_indice=i
+            # this arranges all gap items, like a modified insertion sort
+            while temp_indice >= gap and lst[temp_indice - gap] > current:
+                lst[temp_indice] = lst[temp_indice-gap]
+                temp_indice-=gap
+                
+            lst[temp_indice] = current
+        gap//=2
+    return lst
+        
 
 #quicksort(list) -> sorted list
 def quicksort(lst, low_index = 0, high_index = None) -> list:
     if high_index is None:
         high_index = len(lst) - 1
-    if low_index >= high_index or low_index <0 or high_index < 0:
-        return lst
-    quicksort
-    part = _partition(lst, low_index, high_index)
-    quicksort(lst, low_index, part)
-    quicksort(lst, part, high_index)
+    # run until low index and high index overlap
+    if low_index < high_index:
+        pivot = _partition(lst, low_index, high_index)
+        quicksort(lst, low_index, pivot-1)
+        quicksort(lst, pivot+1, high_index)
     return lst
 
 def _partition(lst, low, high) -> int:
-    pivot = (low + high) // 2
-    pivotValue = lst[pivot]
-    while True:
-        while lst[low] < pivotValue:
-            low += 1
-        while lst[high-1] > pivotValue:
-            high -= 1
-        if low >= high:
-            return high
-        else:
-            lst[low], lst[high-1] = lst[high-1], lst[low]
-            low += 1
-            high -= 1
+    pivot = lst[high] # Putting the pivot at the end so I only sort one side
+    small_index = low-1
+    # Loops through the list section and swaps items so all items to the right of pivot are smaller
+    for i in range(low, high):
+        if lst[i] <= pivot:
+            small_index += 1
+            lst[small_index], lst[i] = lst[i], lst[small_index]
+    
+    lst[small_index+1], lst[high] = lst[high], lst[small_index+1]
+    
+    return small_index + 1
         
         
