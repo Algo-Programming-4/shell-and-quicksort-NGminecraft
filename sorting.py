@@ -41,11 +41,33 @@ def shell(lst):
     for gap in gaps:
         lst_starting_indices = list(range(len(lst)-1-gap))
         for i in lst_starting_indices:
-            
+            pass
 
 #quicksort(list) -> sorted list
-def quicksort(lst):
-    pass
+def quicksort(lst, low_index = 0, high_index = None) -> list:
+    if high_index is None:
+        high_index = len(lst) - 1
+    if low_index >= high_index or low_index <0 or high_index < 0:
+        return lst
+    quicksort
+    part = _partition(lst, low_index, high_index)
+    quicksort(lst, low_index, part)
+    quicksort(lst, part, high_index)
+    return lst
 
-
-print(shell([5,4,3,2,1]))
+def _partition(lst, low, high) -> int:
+    pivot = (low + high) // 2
+    pivotValue = lst[pivot]
+    while True:
+        while lst[low] < pivotValue:
+            low += 1
+        while lst[high-1] > pivotValue:
+            high -= 1
+        if low >= high:
+            return high
+        else:
+            lst[low], lst[high-1] = lst[high-1], lst[low]
+            low += 1
+            high -= 1
+        
+        

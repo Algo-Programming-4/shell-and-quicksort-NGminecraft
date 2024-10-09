@@ -25,18 +25,10 @@ class test_sorting(unittest.TestCase):
         
     def test_shell(self):
         result = sorting.shell(nums)
-        self.assertIsNone(result)
+        self.assertIsNotNone(result)
         self.assertEqual(result, sorted_nums)
         
     def test_quicksort(self):
         result = sorting.quicksort(nums)
-        self.assertIsNone(result)
+        self.assertIsNotNone(result)
         self.assertEqual(result, sorted_nums)
-        
-""" 
-if __name__ == "__main__":
-    test = test_sorting()
-    test.test_bubble()
-    test.test_selection()
-    test.test_insertion()
-"""
